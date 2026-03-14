@@ -21,7 +21,7 @@ def crea_tablero(lado=15):
     tablero = np.full((lado, lado), " ")
     return tablero
 
-#*****************************************************************
+#*********************************************************************************************
 
 def coloca_barco_plus(tablero, barco):
     # Nos devuelve el tablero si puede colocar el barco, si no devuelve False, y avise por pantalla
@@ -46,7 +46,7 @@ def coloca_barco_plus(tablero, barco):
     return tablero_temp
 
 
-#*********************************************************************
+#*****************************************************************************************************
 
 def crea_barco_aleatorio(tablero,eslora = 4, num_intentos = 100):
     num_max_filas = tablero.shape[0] #numero maximo filas = 15
@@ -76,7 +76,7 @@ def crea_barco_aleatorio(tablero,eslora = 4, num_intentos = 100):
             return tablero_temp
         #print("Tengo que intentar colocar otro barco")
 
-#*********************************************************************
+#*******************************************************************************************************
 
 def colocar_todos_barcos_en_tablero(tablero, esloras = [4,3,3,2,2,2]):
     ''' 
@@ -96,8 +96,57 @@ def colocar_todos_barcos_en_tablero(tablero, esloras = [4,3,3,2,2,2]):
 
     return tablero_actual
 
-#*********************************************************************
+#*************************************************************************************************************
+'''   
+tablero_juego = crea_tablero(15)
+tablero_jugador = colocar_todos_barcos_en_tablero(tablero_juego) 
+tablero_ordenador = colocar_todos_barcos_en_tablero(tablero_juego)
+
+print("********************* Tablero del jugador *******************", "\n",tablero_jugador)
+print("")
+print("********************* Tablero del ordenador *******************", "\n",tablero_ordenador)
+'''
+#*****************************************************************************************************
+  
+def generar_coordenada_aleatoria(tablero):
+    '''
+    Crea coordenada aletoria para disparo del ordenador
     
+    Args:
+        tablero (numpy.ndarray): Tablero del orderador 
+        
+    Returns:
+        coordenada(tupla): Tupla generedada con 2 elemenetos
+    '''
+    num_max_filas = tablero.shape[0] #numero maximo filas = 15
+    num_max_columnas = tablero.shape[1] #numero maximo columnas = 15
+
+    coordenada_aleatoria = (random.randint(0,num_max_filas-1),random.randint(0, num_max_columnas -1)) #(randon.randint(0,15),randon.randint(0,15)
+    return coordenada_aleatoria   
+ 
+#*****************************************************************************************************
+def recibir_disparo(tablero, coordenada):
+    if tablero[coordenada] == "O":
+        tablero[coordenada] = "X"
+        print("Tocado")
+    elif tablero[coordenada] == "X":
+        print("Agonia, deja de perder el tiempo, dispara a otro sitio")
+    else:
+        tablero[coordenada] = "-"
+        print("Agua")
+
+
+#*****************************************************************************************************
+def ver_tablero_jugador(tablero):
+    print()
+
+#*****************************************************************************************************
+
+def ver_tablero_ordenador(tablero):
+    print()
+
+#*****************************************************************************************************
+
 tablero_juego = crea_tablero(15)
 tablero_jugador = colocar_todos_barcos_en_tablero(tablero_juego) 
 tablero_ordenador = colocar_todos_barcos_en_tablero(tablero_juego)
@@ -106,10 +155,10 @@ print("********************* Tablero del jugador *******************", "\n",tabl
 print("")
 print("********************* Tablero del ordenador *******************", "\n",tablero_ordenador)
 
+#recibir_disparo(tablero,(5,6))
+#print(tablero)
 
 
+recibir_disparo(tablero_jugador,generar_coordenada_aleatoria(tablero_juego)) #disparo del ordenador
 
-
-
-
-
+print(tablero_jugador)
