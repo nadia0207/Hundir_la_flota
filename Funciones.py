@@ -128,15 +128,25 @@ def recibir_coordenada_jugador(tablero,coordenada):
         raise ValueError(f"⚠️  Numeros fuera del rango del tablero, maximo indicar {num_max_columnas-1}")
 
 #*****************************************************************************************************
-def recibir_disparo(tablero, coordenada):
+def recibir_disparo(tablero, coordenada,participante):
+    print(" ")
     if tablero[coordenada] == "O":
         tablero[coordenada] = "X"
-        print("💥💥 Tocado......")
+
+        if participante == "ordenador":
+            print("💥💥 Fuiste Tocado......")
+        else:
+            print("💥💥 En hora buena tocaste......")
+
     elif tablero[coordenada] == "X":
         print("Agonia, deja de perder el tiempo, dispara a otro sitio")
+
     else:
         tablero[coordenada] = "-"
-        print(" 🌊🌊 Agua....")
+        if participante == "ordenador":
+            print(" 🌊🌊 Agua...Suerte!! no te dieron")
+        else:
+            print(" 🌊🌊 Mala suerte diste al Agua....")
 
 #*****************************************************************************************************
 
@@ -164,25 +174,24 @@ def tablero_tiene_barcos_o(tablero):
 
 
 #*****************************************************************************************************
+def muestra_coordenadas_barcos_O(tablero):
+    lista = []
+    for fila in range(tablero.shape[0]):
+        for columna in range(tablero.shape[1]):
+            if tablero[fila,columna] == "O":
+                lista.append((fila,columna))
+    
+    return lista
+#*****************************************************************************************************
+
+tablero_1 = np.array([["-","-","-","-"],
+                      ["-","x","X","-"],
+                      ["X","-","-","x"]])
+
+#tablero_tiene_barcos_o(tablero_1)
+print(tablero_tiene_barcos_o(tablero_1))
+
+#print(muestra_coordenadas_barcos(tablero_1))
 
 #*****************************************************************************************************
 
-#tablero_juego = crea_tablero(15)
-#tablero_jugador = colocar_todos_barcos_en_tablero(tablero_juego) 
-#tablero_ordenador = colocar_todos_barcos_en_tablero(tablero_juego)
-
-#print("********************* Tablero del jugador *******************", "\n",tablero_jugador)
-#print("")
-#print("********************* Tablero del ordenador *******************", "\n",tablero_ordenador)
-
-#recibir_disparo(tablero,(5,6))
-#print(tablero)
-
-
-#recibir_disparo(tablero_jugador,generar_coordenada_aleatoria(tablero_juego)) #disparo del ordenador hacia tablero de jugador
-
-#print(tablero_jugador)
-
-#recibir_disparo(tablero_ordenador,recibir_coordenada_jugador(tablero_juego,"5.5")) #disparo del jugador hacia tablero del ordenador
-
-#print(tablero_ordenador)

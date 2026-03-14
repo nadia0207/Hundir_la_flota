@@ -28,13 +28,14 @@ def menu_juego():
         str: Opción elegida por el usuario.
     '''
     print("\n" + "="*40)
-    print("  Ingresa las coordenadas (fila.columna) o elije opciones ")
+    print("  Ingresa las coordenadas (fila.columna)")
     print("="*40)
     print("1- Ver tablero de jugador")
     print("2- Salir")
-    print("3- Ver tablero de ordenador")
+    print("3- Ver tablero del ordenador")
+    print("4- Ver coordenada de barcos del ordenador")
     print("="*40)
-    opcion = input("Selecciona una opción: ")
+    opcion = input("Ingresa las coordenadas (fila.columna) o elije opciones: ")
     return opcion
 
 
@@ -70,24 +71,32 @@ def ejecutar_juego():
                     
                 elif opcion_juego == "3":
                     funciones.ver_tablero_ordenador(tablero_ordenador)
+                
+                elif opcion_juego == "4":
+                    print(funciones.muestra_coordenadas_barcos_O(tablero_ordenador))
                     
                 else:
-                    funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego)) #disparo del jugador hacia tablero del ordenador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego)) #disparo del ordenador hacia tablero de jugador
-                    
+                    funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego),"jugador") #disparo del jugador hacia tablero del ordenador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+
+
                     #verifica si tablero tiene barcos con "O"
-                    if funciones.tablero_tiene_barcos_o(tablero_ordenador):
-                        continue
-                    elif funciones.tablero_tiene_barcos_o(tablero_jugador):
-                        continue
-                    elif not funciones.tablero_tiene_barcos_o(tablero_ordenador):
-                        print("Perdiste.......")
+                    if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
+                        print("\n 🎉🎉  Ganaste!!!!! ......")
                         break
-                    else:
-                        print("Ganaste ......")
+                    if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
+                        print("\n 💀💀 Perdiste!!!!!.......")
                         break
-                    
-        
+                        
+                      
         elif opcion == "2":
             print("\n👋 ¡Hasta luego!")
             break
