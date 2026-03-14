@@ -1,4 +1,5 @@
-
+import main_
+import funciones
 
 def menu_principal():
     '''
@@ -27,7 +28,7 @@ def menu_juego():
         str: Opción elegida por el usuario.
     '''
     print("\n" + "="*40)
-    print("  Ingresa las coordenadas *(fila,columna): ")
+    print("  Ingresa las coordenadas (fila.columna) o elije opciones ")
     print("="*40)
     print("1- Ver tablero de jugador")
     print("2- Salir")
@@ -49,25 +50,43 @@ def ejecutar_juego():
 
             print("\n¡Iniciando partida 🎮 a jugar...!")
             #Aqui ira la logica del juego
-            
+            resultado = main_.iniciar_juego()
+            tablero_juego = resultado[0]
+            tablero_jugador = resultado[1]
+            tablero_ordenador = resultado[2]
+            funciones.ver_tablero_jugador(tablero_jugador)
+            funciones.ver_tablero_ordenador(tablero_ordenador)
 
 
             while True:
                 opcion_juego = menu_juego()
-
+            
                 if opcion_juego == "1":
-                     print("\nTablero del jugador:")
-                    # print(tablero_jugador)
+                    funciones.ver_tablero_jugador(tablero_jugador)
                     
                 elif opcion_juego == "2":
                     print("\nSaliendo del juego...👋 ¡Hasta luego!")
                     break
                     
                 elif opcion_juego == "3":
-                    print("\nTablero del ordenador:")
-                    # print(tablero_ordenador)
+                    funciones.ver_tablero_ordenador(tablero_ordenador)
+                    
                 else:
-                    print("\n⚠️ Opción no válida, intenta de nuevo")
+                    funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego)) #disparo del jugador hacia tablero del ordenador
+                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego)) #disparo del ordenador hacia tablero de jugador
+                    
+                    #verifica si tablero tiene barcos con "O"
+                    if funciones.tablero_tiene_barcos_o(tablero_ordenador):
+                        continue
+                    elif funciones.tablero_tiene_barcos_o(tablero_jugador):
+                        continue
+                    elif not funciones.tablero_tiene_barcos_o(tablero_ordenador):
+                        print("Perdiste.......")
+                        break
+                    else:
+                        print("Ganaste ......")
+                        break
+                    
         
         elif opcion == "2":
             print("\n👋 ¡Hasta luego!")
@@ -76,5 +95,5 @@ def ejecutar_juego():
             print("\n⚠️ Opción no válida, intenta de nuevo")
         
 # Ejecutar el juego
-tablero_juego = funciones.crea_tablero(15)
+#tablero_juego = funciones.crea_tablero(15)
 ejecutar_juego()
