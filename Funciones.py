@@ -184,12 +184,12 @@ def muestra_coordenadas_barcos_O(tablero):
     return lista
 #*****************************************************************************************************
 
-tablero_1 = np.array([["-","-","-","-"],
-                      ["-","x","X","-"],
-                      ["X","-","-","x"]])
+#tablero_1 = np.array([["-","-","-","-"],
+#                      ["-","x","X","-"],
+#                      ["X","-","-","x"]])
 
 #tablero_tiene_barcos_o(tablero_1)
-print(tablero_tiene_barcos_o(tablero_1))
+#print(tablero_tiene_barcos_o(tablero_1))
 
 #print(muestra_coordenadas_barcos(tablero_1))
 
