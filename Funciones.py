@@ -1,0 +1,115 @@
+
+import numpy as np
+import random
+
+def crea_tablero(lado=15):
+    '''
+    Crea un tablero vacío como matriz cuadrada.
+
+    Args:
+        lado (int): Tamaño del lado del tablero. Por defecto 10.
+
+    Returns:
+        numpy.ndarray: Matriz cuadrada de dimensiones (lado x lado) rellena de espacios.
+
+    Raises:
+        ValueError: Si lado no es un entero.
+    '''
+    if type(lado) != int:
+        raise ValueError("El numero ingresado no es un entero")
+    
+    tablero = np.full((lado, lado), " ")
+    return tablero
+
+#*****************************************************************
+
+def coloca_barco_plus(tablero, barco):
+    # Nos devuelve el tablero si puede colocar el barco, si no devuelve False, y avise por pantalla
+    tablero_temp = tablero.copy()
+
+    num_max_filas = tablero.shape[0]
+    num_max_columnas = tablero.shape[1]
+    
+    for pieza in barco: #barco = [(3,5),(3,4),(3,3),(3,2)]
+        fila = pieza[0] #3
+        columna = pieza[1] #5
+        if fila < 0  or fila >= num_max_filas:
+            #print(f"No puedo poner la pieza {pieza} porque se sale del tablero")
+            return False
+        if columna <0 or columna>= num_max_columnas:
+            #print(f"No puedo poner la pieza {pieza} porque se sale del tablero")
+            return False
+        if tablero[pieza] == "O" or tablero[pieza] == "X":
+            #print(f"No puedo poner la pieza {pieza} porque hay otro barco")
+            return False
+        tablero_temp[pieza] = "O"
+    return tablero_temp
+
+
+#*********************************************************************
+
+def crea_barco_aleatorio(tablero,eslora = 4, num_intentos = 100):
+    num_max_filas = tablero.shape[0] #numero maximo filas = 15
+    num_max_columnas = tablero.shape[1] #numero maximo columnas = 15
+    while True:
+        barco = []
+        pieza_original = (random.randint(0,num_max_filas-1),random.randint(0, num_max_columnas -1)) #(randon.randint(0,15),randon.randint(0,15)
+        #print("Pieza original:", pieza_original)
+        barco.append(pieza_original)
+        orientacion = random.choice(["N","S","O","E"]) #ramdon choice, elige un aleatorio de la lista
+        #print("Con orientacion", orientacion)
+        fila = pieza_original[0]
+        columna = pieza_original[1]
+        for i in range(eslora -1):
+            if orientacion == "N":
+                fila -= 1
+            elif orientacion  == "S":
+                fila += 1
+            elif orientacion == "E":
+                columna += 1
+            else:
+                columna -= 1
+            pieza = (fila,columna)
+            barco.append(pieza)
+        tablero_temp = coloca_barco_plus(tablero, barco) #barco = [(3,5),(3,4),(3,3),(3,2)]
+        if type(tablero_temp) == np.ndarray:
+            return tablero_temp
+        #print("Tengo que intentar colocar otro barco")
+
+#*********************************************************************
+
+def colocar_todos_barcos_en_tablero(tablero, esloras = [4,3,3,2,2,2]):
+    ''' 
+    Coloca todos los barcos en el tablero.
+
+    Args:
+        tablero (numpy.ndarray): Tablero vacío donde se colocarán los barcos.
+        esloras (list): Lista con el tamaño de cada barco. Por defecto [4, 3, 3, 2, 2, 2].
+
+    Returns:
+        numpy.ndarray: Tablero con todos los barcos colocados. 
+    '''
+    tablero_actual = tablero.copy()
+
+    for eslora in esloras:
+        tablero_actual = crea_barco_aleatorio(tablero_actual,eslora)
+
+    return tablero_actual
+
+#*********************************************************************
+    
+tablero_juego = crea_tablero(15)
+tablero_jugador = colocar_todos_barcos_en_tablero(tablero_juego) 
+tablero_ordenador = colocar_todos_barcos_en_tablero(tablero_juego)
+
+print("********************* Tablero del jugador *******************", "\n",tablero_jugador)
+print("")
+print("********************* Tablero del ordenador *******************", "\n",tablero_ordenador)
+
+
+
+
+
+
+
+
