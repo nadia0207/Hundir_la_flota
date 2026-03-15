@@ -1,6 +1,11 @@
 # 🚢 Hundir la Flota
 
-Juego clásico de **Hundir la Flota** (Battleship) desarrollado en Python, jugable directamente desde la consola.
+<p aling="center">
+<img src="./img/hundir-la-flota.jpg" aling>
+</p>
+
+---
+Juego clásico de **Hundir la Flota** desarrollado en Python, jugable directamente desde la consola.
 
 ---
 
