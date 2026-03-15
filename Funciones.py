@@ -129,9 +129,12 @@ def recibir_coordenada_jugador(tablero,coordenada):
 
 #*****************************************************************************************************
 def recibir_disparo(tablero, coordenada,participante):
+    continuar_disparo = False
     print(" ")
+
     if tablero[coordenada] == "O":
         tablero[coordenada] = "X"
+        continuar_disparo = True
 
         if participante == "ordenador":
             print("💥💥 Fuiste Tocado......")
@@ -147,7 +150,8 @@ def recibir_disparo(tablero, coordenada,participante):
             print(" 🌊🌊 Agua...Suerte!! no te dieron")
         else:
             print(" 🌊🌊 Mala suerte diste al Agua....")
-
+            
+    return continuar_disparo
 #*****************************************************************************************************
 
 def ver_tablero_jugador(tablero):

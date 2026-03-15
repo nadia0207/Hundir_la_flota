@@ -27,14 +27,14 @@ def menu_juego():
     Returns:
         str: Opción elegida por el usuario.
     '''
-    print("\n" + "="*40)
-    print("  Ingresa las coordenadas (fila.columna)")
-    print("="*40)
+    print("\n" + "="*45)
+    print("\t"*2 +  "MENÚ DE OPCIONES")
+    print("="*45)
     print("1- Ver tablero de jugador")
     print("2- Salir")
     print("3- Ver tablero del ordenador")
     print("4- Ver coordenada de barcos del ordenador")
-    print("="*40)
+    print("="*45)
     opcion = input("Ingresa las coordenadas (fila.columna) o elije opciones: ")
     return opcion
 
@@ -76,26 +76,27 @@ def ejecutar_juego():
                     print(funciones.muestra_coordenadas_barcos_O(tablero_ordenador))
                     
                 else:
-                    funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego),"jugador") #disparo del jugador hacia tablero del ordenador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-                    funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
-
-
-                    #verifica si tablero tiene barcos con "O"
-                    if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
-                        print("\n 🎉🎉  Ganaste!!!!! ......")
-                        break
-                    if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
-                        print("\n 💀💀 Perdiste!!!!!.......")
-                        break
+                    resultado_disparo_jugador = funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego),"jugador") #disparo del jugador hacia tablero del ordenador
+                    
+                    if resultado_disparo_jugador: #Verifica si jugador disparo un barco, vuelve a solicitar otra coordenada
+                        #verifica si tablero tiene barcos con "O"
+                        if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
+                            print("\n 🎉🏆  Ganaste!!!!! ......")
+                            break
+                        continue
+                    
+                    resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
+                    
+                    while resultado_disparo_ordenador:
+                        #verifica si tablero tiene barcos con "O"
+                        if funciones.tablero_tiene_barcos_o(tablero_jugador) == False:
+                            print("\n 💀💀 Perdiste!!!!!.......")
+                            break                   
                         
+                        print("🔄 El ordenador voleverá a disparar")
+                        resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador")
+                                    
+                       
                       
         elif opcion == "2":
             print("\n👋 ¡Hasta luego!")
