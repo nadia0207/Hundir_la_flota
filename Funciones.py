@@ -142,7 +142,7 @@ def recibir_disparo(tablero, coordenada,participante):
             print("💥💥 En hora buena tocaste......")
 
     elif tablero[coordenada] == "X":
-        print("Agonia, deja de perder el tiempo, dispara a otro sitio")
+        print("😩 Agonia, deja de perder el tiempo, dispara a otro sitio")
 
     else:
         tablero[coordenada] = "-"
@@ -150,7 +150,7 @@ def recibir_disparo(tablero, coordenada,participante):
             print(" 🌊🌊 Agua...Suerte!! no te dieron")
         else:
             print(" 🌊🌊 Mala suerte diste al Agua....")
-            
+
     return continuar_disparo
 #*****************************************************************************************************
 
