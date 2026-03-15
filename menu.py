@@ -85,6 +85,21 @@ def ejecutar_juego():
                             break
                         continue
                     
+                    #Disparo del ordenador ====================
+                    #OPCION 1: Disparos consecutivos
+                    
+                    for i in range(50):
+                        funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") 
+                        print(i + 1)
+                        if funciones.tablero_tiene_barcos_o(tablero_jugador) == False:
+                            print("\n 💀💀 Perdiste!!!!!.......")
+                            break  
+                    
+                    #Hasta aqui OPCION 1----------------------------
+
+                    #Disparo del ordenador ====================
+                    #OPCION 2: Disparo 1 a 1
+                    '''
                     resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
                     
                     while resultado_disparo_ordenador:
@@ -95,6 +110,8 @@ def ejecutar_juego():
                         
                         print("🔄 El ordenador voleverá a disparar")
                         resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador")
+                    '''
+                    #Hasta aqui OPCION 2----------------------------
                                     
                        
                       
