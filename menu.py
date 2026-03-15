@@ -58,8 +58,8 @@ def ejecutar_juego():
             funciones.ver_tablero_jugador(tablero_jugador)
             funciones.ver_tablero_ordenador(tablero_ordenador)
 
-
-            while True:
+            continuar_juego = True
+            while continuar_juego:
                 opcion_juego = menu_juego()
             
                 if opcion_juego == "1":
@@ -76,24 +76,46 @@ def ejecutar_juego():
                     print(funciones.muestra_coordenadas_barcos_O(tablero_ordenador))
                     
                 else:
-                    resultado_disparo_jugador = funciones.recibir_disparo(tablero_ordenador,funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego),"jugador") #disparo del jugador hacia tablero del ordenador
-                    
-                    if resultado_disparo_jugador: #Verifica si jugador disparo un barco, vuelve a solicitar otra coordenada
-                        #verifica si tablero tiene barcos con "O"
-                        if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
-                            print("\n 🎉🏆  Ganaste!!!!! ......")
-                            break
+                    #verifico si numero ingresado no esta dentro del menu de opciones
+                    if opcion_juego.isdigit():
+                        print("\n ⚠️  Opcion ingresada incorrecta")
                         continue
+                    if opcion_juego.isalpha():
+                        print("\n ⚠️  No debe ingresar letras")
+                        continue
+
+                    #verifico si se recibe la tupla o el numero maximo de columnas
+                    resultado_coordenada = funciones.recibir_coordenada_jugador(tablero_juego,opcion_juego)
+
+                    #verifico si se recibe la tupla o el numero maximo de columnas
+                    if type(resultado_coordenada) is tuple: #(4,5)
+                        #si es una tupla dispara y obtiene True o False si llega a disparar
+                        resultado_disparo_jugador = funciones.recibir_disparo(tablero_ordenador,resultado_coordenada,"jugador") #disparo del jugador hacia tablero del ordenador
+
+                        if resultado_disparo_jugador: #Verifica si jugador disparo un barco, vuelve a solicitar otra coordenada
+                        #verifica si tablero del ordenador no tiene barcos con "O"
+                            if funciones.tablero_tiene_barcos_o(tablero_ordenador) == False:
+                                print("\n 🎉🏆  Ganaste!!!!! ......")
+                                break
+                            continue  #vuelve a iniciar el while para volver a pedir coordenada
+
+                    else: #si recibe el numero maximo de columnas y no una tupla
+                        print(f"\n ⚠️  Ingrese coordenadas correctas, no pueden ser mayor a {resultado_coordenada}")
+                        continue
+
+                    
                     
                     #Disparo del ordenador ====================
-                    #OPCION 1: Disparos consecutivos
+                    #OPCION 1: Disparos consecutivos del ordenador 
                     
                     for i in range(50):
                         funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") 
                         print(i + 1)
                         if funciones.tablero_tiene_barcos_o(tablero_jugador) == False:
                             print("\n 💀💀 Perdiste!!!!!.......")
-                            break  
+                            continuar_juego = False
+                            break   
+
                     
                     #Hasta aqui OPCION 1----------------------------
 
@@ -106,6 +128,7 @@ def ejecutar_juego():
                         #verifica si tablero tiene barcos con "O"
                         if funciones.tablero_tiene_barcos_o(tablero_jugador) == False:
                             print("\n 💀💀 Perdiste!!!!!.......")
+                            continuar_juego = False
                             break                   
                         
                         print("🔄 El ordenador voleverá a disparar")

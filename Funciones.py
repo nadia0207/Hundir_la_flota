@@ -125,8 +125,8 @@ def recibir_coordenada_jugador(tablero,coordenada):
         return tupla
             
     if tupla[0] >= num_max_filas or tupla[1] >= num_max_columnas:
-        raise ValueError(f"⚠️  Numeros fuera del rango del tablero, maximo indicar {num_max_columnas-1}")
-
+        return num_max_columnas - 1
+    
 #*****************************************************************************************************
 def recibir_disparo(tablero, coordenada,participante):
     continuar_disparo = False
@@ -187,15 +187,3 @@ def muestra_coordenadas_barcos_O(tablero):
     
     return lista
 #*****************************************************************************************************
-
-#tablero_1 = np.array([["-","-","-","-"],
-#                      ["-","x","X","-"],
-#                      ["X","-","-","x"]])
-
-#tablero_tiene_barcos_o(tablero_1)
-#print(tablero_tiene_barcos_o(tablero_1))
-
-#print(muestra_coordenadas_barcos(tablero_1))
-
-#*****************************************************************************************************
-
