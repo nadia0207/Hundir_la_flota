@@ -59,6 +59,7 @@ def ejecutar_juego():
             funciones.ver_tablero_ordenador(tablero_ordenador)
 
             continuar_juego = True
+
             while continuar_juego:
                 opcion_juego = menu_juego()
             
@@ -107,7 +108,7 @@ def ejecutar_juego():
                     
                     #Disparo del ordenador ====================
                     #OPCION 1: Disparos consecutivos del ordenador 
-                    
+                    '''
                     for i in range(50):
                         funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") 
                         print(i + 1)
@@ -116,12 +117,12 @@ def ejecutar_juego():
                             continuar_juego = False
                             break   
 
-                    
+                    '''
                     #Hasta aqui OPCION 1----------------------------
 
                     #Disparo del ordenador ====================
                     #OPCION 2: Disparo 1 a 1
-                    '''
+                    
                     resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador") #disparo del ordenador hacia tablero de jugador
                     
                     while resultado_disparo_ordenador:
@@ -133,7 +134,7 @@ def ejecutar_juego():
                         
                         print("🔄 El ordenador voleverá a disparar")
                         resultado_disparo_ordenador = funciones.recibir_disparo(tablero_jugador,funciones.generar_coordenada_aleatoria(tablero_juego),"ordenador")
-                    '''
+                    
                     #Hasta aqui OPCION 2----------------------------
                                     
                        
