@@ -16,7 +16,7 @@ def iniciar_juego():
             - tablero_ordenador (numpy.ndarray): Tablero del ordenador con los barcos colocados.
     '''
 
-    tablero_juego = funciones.crea_tablero(15)
+    tablero_juego = funciones.crea_tablero(10)
     tablero_jugador = funciones.colocar_todos_barcos_en_tablero(tablero_juego) 
     tablero_ordenador = funciones.colocar_todos_barcos_en_tablero(tablero_juego)
     
